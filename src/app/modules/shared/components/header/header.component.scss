@@ -1,0 +1,90 @@
+.nav-header-container {
+  background: var(--color-darkgreen);
+
+  .nav-header {
+    margin: 0 auto;
+    max-width: 1000px;
+
+    .mat-toolbar {
+      padding: 0px 5px !important;
+    }
+
+    .logo {
+      cursor: pointer;
+      max-height: 50%;
+      width: auto;
+      height: auto;
+    }
+
+    .spacer {
+      flex: 1 1 auto;
+    }
+
+    .mobile-icon {
+      mat-icon {
+        font-size: 35px;
+        height: 35px;
+        width: 35px;
+        margin-right: 5px;
+        cursor: pointer;
+        padding-top: 10px;
+      }
+    }
+
+    .not-mobile-icon {
+      margin-right: 10px;
+
+      span {
+        padding-left: 2px;
+        padding-top: 10px;
+      }
+    }
+
+
+    .profile {
+      font-size: 45px;
+      height: 45px;
+      width: 45px;
+      cursor: pointer;
+    }
+  }
+}
+
+.profile-menu {
+  z-index: 1000;
+
+  button:hover {
+    background-color: var(--color-primary) !important;
+  }
+
+  .header {
+    color: white;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+
+    .primary {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .secondary {
+      font-size: small;
+    }
+  }
+
+  .footer {
+    background-color: var(--color-secondary);
+    padding-top: 15px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    button:last-child {
+      margin-top: 10px;
+    }
+  }
+}

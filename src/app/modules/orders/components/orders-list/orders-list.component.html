@@ -1,0 +1,81 @@
+<section class="order-list">
+  <ng-container *ngIf="!error;else errorTemplate">
+    <div [formGroup]="form" class="filters">
+      <!-- CODIGO -->
+      <mat-form-field appearance="outline" class="field-status" ngClass.xs="mobile">
+        <mat-label>{{stringSrv.getLiteral('ordersList.filter.code.label')}}</mat-label>
+        <input matInput #input appNumberOnly formControlName="orderCode" [attr.maxlength]="CODE_ORDER_MAX_LENGTH"
+          [attr.minlength]="CODE_ORDER_MIN_LENGTH"
+          (paste)="form.get('orderCode')?.setValue(stringSrv.trimAll($event?.clipboardData?.getData('text')))">
+        <mat-hint align="end">{{input.value?.length || 0}}/{{CODE_ORDER_MAX_LENGTH}}</mat-hint>
+        <button *ngIf="form.get('orderCode')?.value" matSuffix mat-icon-button aria-label="Clear"
+          (click)="emptyFormControlValue('orderCode'); $event.stopPropagation()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <!-- ESTADOS -->
+      <mat-form-field appearance="outline" class="field-status" ngClass.xs="mobile">
+        <mat-label>{{stringSrv.getLiteral('ordersList.filter.status.label')}}</mat-label>
+        <mat-select [disabled]="loading || form.get('orderCode')?.value?.length === CODE_ORDER_MAX_LENGTH"
+          [(value)]="selectedStatusFilter" (selectionChange)="onStatusFilter()">
+          <mat-option value=""> {{statusListDefaultValueStr()}} </mat-option>
+          <ng-container *ngFor="let status of orderStatusKeyValues">
+            <mat-option [value]="status['key']">
+              {{status['value']}}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+      <!-- RANGO FECHAS -->
+      <mat-form-field appearance="outline" ngClass.xs="mobile">
+        <mat-label>{{stringSrv.getLiteral('ordersList.filter.date.label')}}</mat-label>
+        <mat-select [disabled]="loading || form.get('orderCode')?.value?.length === CODE_ORDER_MAX_LENGTH"
+          [(value)]="selectedDateFilterValue" (selectionChange)="onDateFilter()">
+          <mat-option value="">{{stringSrv.getLiteral('ordersList.filter.date.all')}}</mat-option>
+          <mat-option value="TODAY">{{stringSrv.getLiteral('ordersList.filter.date.today')}}</mat-option>
+          <mat-option value="CUSTOM">{{stringSrv.getLiteral('ordersList.filter.date.custom')}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="selectedDateFilterValue === 'CUSTOM'" appearance="outline" ngClass.xs="mobile">
+        <mat-label>{{stringSrv.getLiteral('ordersList.filter.date.custom.pickerLabel')}}</mat-label>
+        <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+          <input matStartDate formControlName="start" placeholder="Fecha inicio">
+          <input matEndDate formControlName="end" placeholder="Fecha fin">
+        </mat-date-range-input>
+        <!-- <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint> -->
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+    <div class="order-by">
+      <span class="bold">Ordenar por:</span>
+      <span>&nbsp;Fecha prevista de entrega</span>
+      <mat-icon>event_available</mat-icon>
+    </div>
+    <ng-container *ngIf="!loading;else loadingTemplate">
+      <ng-container *ngIf="orders?.length > 0;else emptyListTemplate">
+        <ng-container *ngFor="let order of orders">
+          <app-order-card class="order-card" [mode]="mode" [order]="order" [myUser]="myUser"
+            (orderUpdated)="reloadRoute()"></app-order-card>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <div class="paginator" [ngClass]="{'disabled': loading}" *ngIf="pageTotalLength > 0">
+      <mat-paginator [disabled]="loading" [length]="pageTotalLength" [pageSizeOptions]="PAGE_SIZES"
+        [pageIndex]="pageSelected" [showFirstLastButtons]="true" (page)="onPaginatorChange($event)"></mat-paginator>
+    </div>
+  </ng-container>
+</section>
+
+<ng-template #emptyListTemplate>
+  <app-notification [type]="NotificationTypesEnum.INFO"
+    [notification]="stringSrv.getLiteral('notifications.info', 'emptyOrderList')"></app-notification>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <app-spinner></app-spinner>
+</ng-template>
+
+<ng-template #errorTemplate>
+  <app-notification></app-notification>
+</ng-template>

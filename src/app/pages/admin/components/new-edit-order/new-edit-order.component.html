@@ -1,0 +1,90 @@
+<div class="company-order">
+  <ng-container *ngIf="!error; else errorTemplate">
+    <ng-container *ngIf="!loading; else loadingTemplate">
+      <form [formGroup]="form" class="company-form" (ngSubmit)="onSubmit()">
+        <!-- CÓDIGO NUEVO PEDIDO -->
+        <div class="order-code-group">
+          <div class="order-code-title">{{stringSrv.getLiteral('label.newOrder.code')}}</div>
+          <div class="order-code-value" ngClass.lt-md="mobile" ngClass.gt-sm="not-mobile">
+            {{orderCode | formatCodeOrder}}
+          </div>
+        </div>
+        <p>
+          <!-- TITULO -->
+          <mat-form-field class="full-width" appearance="outline" [floatLabel]="'always'">
+            <mat-label>{{stringSrv.getLiteral('label.newOrder.title')}}</mat-label>
+            <input matInput #input formControlName="title" minlength="{{MINIMUM_LENGTH_TITLE}}"
+              maxlength="{{MAX_LENGTH_TITLE}}">
+            <mat-hint align="end">{{input.value?.length || 0}}/{{MAX_LENGTH_TITLE}}</mat-hint>
+            <mat-error *ngIf="form.get('title')?.hasError('required')">
+              {{stringSrv.getLiteral('label.newOrder.titleRequiredError')}}
+            </mat-error>
+            <mat-error *ngIf="form.get('title')?.hasError('minlength')">
+              {{stringSrv.getLiteral('label.newOrder.minimumCharacters')?.replace('{0}', MINIMUM_LENGTH_TITLE)}}
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <!-- DESCRIPCIÓN -->
+          <mat-form-field class="full-width" appearance="outline" [floatLabel]="'always'">
+            <mat-label>{{stringSrv.getLiteral('label.newOrder.description')}}</mat-label>
+            <textarea #textarea rows="3" matInput formControlName="description"
+              maxlength="{{MAX_LENGTH_DESCRIPTION}}"></textarea>
+            <mat-hint align="end">{{textarea.value?.length || 0}}/{{MAX_LENGTH_DESCRIPTION}}</mat-hint>
+            <button *ngIf="form.get('description')?.value" matSuffix mat-icon-button aria-label="Clear"
+              (click)="resetFormControlValue('description')">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </p>
+        <div class="flex-box" ngClass.lt-md="mobile" ngClass.gt-sm="not-mobile">
+          <!-- ESTADO -->
+          <mat-form-field appearance="outline" [floatLabel]="'always'">
+            <mat-label>{{stringSrv.getLiteral('label.newOrder.status')}}</mat-label>
+            <mat-select formControlName="status">
+              <ng-container *ngFor="let status of orderStatusKeyValues">
+                <mat-option [value]="status['key']">
+                  {{status['value']}}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <!-- FECHA PREVISTA FINALIZACIÓN-->
+          <mat-form-field appearance="outline" [floatLabel]="'always'" (click)="datePicker.open()">
+            <mat-label>{{stringSrv.getLiteral('label.newOrder.date')}}</mat-label>
+            <input matInput readonly [matDatepicker]="datePicker" formControlName="date">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker></mat-datepicker>
+            <button *ngIf="form.get('date')?.value" matSuffix mat-icon-button aria-label="Clear"
+              (click)="resetFormControlValue('date'); $event.stopPropagation()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+          <!-- DINERO RESTANTE A PAGAR-->
+          <mat-form-field appearance="outline" [floatLabel]="'always'" class="price mt">
+            <mat-label>{{stringSrv.getLiteral('label.newOrder.price')}}</mat-label>
+            <input class="right-align" matInput #input appNumberOnly [allowDecimals]="true" formControlName="price">
+            <mat-icon class="money-simbol" matSuffix>euro_symbol</mat-icon>
+            <mat-icon class="clear" *ngIf="form.get('price')?.value" matSuffix mat-icon-button aria-label="Clear"
+              (click)="resetFormControlValue('price'); $event.stopPropagation()">close</mat-icon>
+          </mat-form-field>
+        </div>
+        <p class="bottom-buttons">
+          <button class="create-btn" mat-raised-button color="primary" type="submit" [disabled]="isBtnDisabled()"
+            [ngClass]="{'btn-animation button-hover' : !isBtnDisabled()}">
+            {{stringSrv.getLiteral(isEditableMode ? 'update' : 'create')}}
+          </button>
+        </p>
+      </form>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #loadingTemplate>
+  <app-spinner></app-spinner>
+</ng-template>
+
+<ng-template #errorTemplate>
+  <app-notification></app-notification>
+</ng-template>

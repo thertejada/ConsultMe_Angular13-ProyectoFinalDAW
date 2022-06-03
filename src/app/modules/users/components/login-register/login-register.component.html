@@ -1,0 +1,133 @@
+<div class="login-comp">
+  <mat-card class="card card-padding">
+    <div *ngIf="!loadingLogin;else loadingTemplate">
+      <form class="login-form" (submit)="onSubmitLogin()" (keyup.enter)="onSubmitLogin()" [formGroup]="loginForm">
+        <mat-card-title class="header">
+          {{stringSrv.getLiteral('login')}}
+        </mat-card-title>
+        <mat-card-content>
+          <p>
+            <mat-form-field class="full-width">
+              <input formControlName="email" type="email" matInput placeholder="{{stringSrv.getLiteral('email')}}">
+              <mat-error *ngIf="loginForm.get('email').hasError('email') && !loginForm.hasError('required')">
+                {{stringSrv.getLiteral('label.login.email.InvalidError')}}
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('email').hasError('required')">
+                {{stringSrv.getLiteral('label.login.email.RequiredError')}}
+              </mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field class="full-width">
+              <input formControlName="password" [type]="hideLoginPassword ? 'password' : 'text'" matInput
+                placeholder="{{stringSrv.getLiteral('password')}}">
+              <button mat-icon-button matSuffix (click)="hideLoginPassword = !hideLoginPassword">
+                <mat-icon>{{hideLoginPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="loginForm.get('password').hasError('minlength') && !loginForm.hasError('required')">
+                {{stringSrv.getLiteral('label.login.password.InvalidError')}}
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('password').hasError('required')">
+                {{stringSrv.getLiteral('label.login.password.RequiredError')}}
+              </mat-error>
+            </mat-form-field>
+          </p>
+        </mat-card-content>
+        <div class="enter-button-container full-width">
+          <button type="submit" mat-stroked-button
+            class="btn-block full-width btn-animation">{{stringSrv.getLiteral('enter')}}</button>
+        </div>
+      </form>
+      <div class="divider-container">
+        <mat-divider class="divider"></mat-divider>
+        <span>{{stringSrv.getLiteral('or')?.toLowerCase()}}</span>
+        <mat-divider class="divider"></mat-divider>
+      </div>
+      <div class="register-button-container ">
+        <button mat-flat-button class="btn-block btn-animation" color="accent"
+          (click)="onClickOpenRegisterModal()">{{stringSrv.getLiteral('register')}}</button>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+<ng-template #registerModalTemplate let-ref>
+  <div class="login-comp">
+    <div class="register">
+      <mat-card class="card card-padding">
+        <div *ngIf="!loadingRegisterModal;else loadingTemplate">
+          <form [formGroup]="registerForm" class="register-form" (submit)="onSubmitRegister()">
+            <mat-card-title class="header">
+              {{stringSrv.getLiteral('register')}}
+            </mat-card-title>
+            <mat-card-content>
+              <p>
+                <mat-form-field class="full-width">
+                  <input formControlName="name" matInput placeholder="{{stringSrv.getLiteral('name')}}">
+                  <mat-error *ngIf="registerForm.get('name').hasError('required')">
+                    {{stringSrv.getLiteral('label.login.name.RequiredError')}}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width pl">
+                  <input formControlName="surnames" matInput placeholder="{{stringSrv.getLiteral('surnames')}}">
+                  <mat-error *ngIf="registerForm.get('surnames').hasError('required')">
+                    {{stringSrv.getLiteral('label.login.surnames.RequiredError')}}
+                  </mat-error>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field class="full-width">
+                  <input formControlName="email" type="email" matInput placeholder="{{stringSrv.getLiteral('email')}}">
+                  <mat-error *ngIf="registerForm.get('email').hasError('email') && !registerForm.hasError('required')">
+                    {{stringSrv.getLiteral('label.login.email.InvalidError')}}
+                  </mat-error>
+                  <mat-error *ngIf="registerForm.get('email').hasError('required')">
+                    {{stringSrv.getLiteral('label.login.email.RequiredError')}}
+                  </mat-error>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field class="full-width">
+                  <input formControlName="password" [type]="hideRegisterPassword ? 'password' : 'text'" matInput
+                    placeholder="{{stringSrv.getLiteral('password')}}">
+                  <button mat-icon-button matSuffix (click)="hideRegisterPassword = !hideRegisterPassword">
+                    <mat-icon>{{hideRegisterPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="registerForm.get('password').hasError('required')">
+                    {{stringSrv.getLiteral('label.login.password.RequiredError')}}
+                  </mat-error>
+                  <mat-error
+                    *ngIf="registerForm.get('password').hasError('minlength') && !registerForm.get('password').hasError('required')">
+                    {{stringSrv.getLiteral('label.login.password.InvalidError')}}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width pl">
+                  <input formControlName="passwordConfirmation" [type]="hideRegisterPassword ? 'password' : 'text'"
+                    matInput placeholder="{{stringSrv.getLiteral('password')}}">
+                  <mat-error *ngIf="registerForm.get('passwordConfirmation').hasError('required')">
+                    {{stringSrv.getLiteral('label.login.password.RequiredError')}}
+                  </mat-error>
+                  <mat-error
+                    *ngIf="registerForm.get('passwordConfirmation').hasError('minlength') && !registerForm.get('passwordConfirmation').hasError('required')">
+                    {{stringSrv.getLiteral('label.login.password.InvalidError')}}
+                  </mat-error>
+                  <mat-error
+                    *ngIf="registerForm.get('passwordConfirmation').hasError('isMatching') && !registerForm.get('passwordConfirmation').hasError('minlength') && !registerForm.get('passwordConfirmation').hasError('required')">
+                    {{stringSrv.getLiteral('label.login.password.NotSame')}} asddas
+                  </mat-error>
+                </mat-form-field>
+              </p>
+            </mat-card-content>
+            <div class="create-account-button-container">
+              <button mat-flat-button class="btn-block btn-animation">{{stringSrv.getLiteral('createAccount')}}</button>
+            </div>
+          </form>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <app-spinner></app-spinner>
+</ng-template>

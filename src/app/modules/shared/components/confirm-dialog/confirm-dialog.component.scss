@@ -1,0 +1,65 @@
+.order-card-delete-modal {
+  .alert-header {
+    display: flex;
+    flex-direction: row;
+    min-height: 125px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .alert-img {
+    height: 80px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    align-self: center;
+  }
+
+  .alert-body {
+    padding: 0px 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .alert-title {
+    font-size: 18px !important;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 15px;
+    color: #222;
+    align-self: center;
+  }
+
+  .alert-message {
+    font-size: 15px !important;
+    color: #666;
+    font-weight: 400;
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    align-self: center;
+  }
+
+  .question-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    button:first-child {
+      margin-right: 20px;
+    }
+
+    .cancel:hover {
+      background-color: rgb(255, 210, 210) !important;
+    }
+
+    .accept:hover {
+      background-color: var(--color-primary) !important;
+    }
+  }
+
+}

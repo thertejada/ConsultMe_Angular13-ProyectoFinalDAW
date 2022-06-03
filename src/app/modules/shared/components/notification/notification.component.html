@@ -1,0 +1,25 @@
+<div class="notification-comp"
+  [ngClass]="{'error': type === notificationType.ERROR, 'info': type === notificationType.INFO}">
+  <div class="box">
+    <div>
+      <div class="icon">
+        <mat-icon>
+          <ng-container *ngIf="type === notificationType.ERROR">
+            error
+          </ng-container>
+          <ng-container *ngIf="type === notificationType.INFO">
+            error
+          </ng-container>
+        </mat-icon>
+      </div>
+    </div>
+    <div class="txt">
+      <div class="message">
+        <span>{{ notification?.message }}</span>
+      </div>
+      <div class="description">
+        <span>{{ notification?.description }}</span>
+      </div>
+    </div>
+  </div>
+</div>

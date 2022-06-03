@@ -1,0 +1,169 @@
+<ng-container *ngIf="order">
+  <ng-container *ngIf="confirmModal?.isEnabled">
+    <app-confirm-dialog [config]="confirmModal" (onClickAccept)="onClickModal()" (onClickCancel)="onClickModal(true)">
+    </app-confirm-dialog>
+  </ng-container>
+  <ng-template [ngTemplateOutlet]="fullMode ? fullModeTemplate : notFullModeTemplate"></ng-template>
+</ng-container>
+
+<ng-template #fullModeTemplate>
+  <mat-card class="order-card" [ngClass]="{
+    'mat-elevation-z0': mode === CardModeEnum.MODAL,
+    'pending': order.status === OrderStatusEnum.PENDING,
+    'ready-to-pick-up':order.status === OrderStatusEnum.READY_TO_PICK_UP,
+    'delivered':order.status === OrderStatusEnum.DELIVERED
+  }">
+    <mat-card-header class="header">
+      <mat-card-title class="title1">{{order.title}}</mat-card-title>
+      <mat-card-subtitle class="mr-b">{{order?.code | formatCodeOrder}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="content">
+      <div>
+        <ng-container [ngTemplateOutlet]="statustTemplate"
+          [ngTemplateOutletContext]="{isMobile:true, isFullMode: true}"></ng-container>
+        <ng-container [ngTemplateOutlet]="dateTemplate" [ngTemplateOutletContext]="{isMobile:true, isFullMode: true}">
+        </ng-container>
+        <ng-container [ngTemplateOutlet]="priceTemplate" [ngTemplateOutletContext]="{isMobile:true, isFullMode: true}">
+        </ng-container>
+      </div>
+      <p class="desc align-center" *ngIf="order?.description?.length > 0">
+        <mat-icon>info</mat-icon>{{order.description}}
+      </p>
+    </mat-card-content>
+    <mat-divider inset class="divider"></mat-divider>
+    <mat-card-header class="header">
+      <div mat-card-avatar class="order-header-image"></div>
+      <mat-card-title class="title1">{{order.company.name}}</mat-card-title>
+      <mat-card-subtitle class="mr-b"> {{order.company.description}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="content">
+      <p class="align-center">
+        <mat-icon>mail</mat-icon>
+        <a [href]="'mailto:'+order.company.email" target="_blank">{{order.company.email}}</a>
+      </p>
+      <p class="align-center">
+        <mat-icon>call</mat-icon>
+        <a [href]="'tel:'+order.company.phone">{{order.company.phone}}</a>
+      </p>
+      <p class="align-center" *ngIf="order.company?.website">
+        <mat-icon>language</mat-icon>
+        <a [href]="order.company.website | url" target="_blank">{{order.company.website}}</a>
+      </p>
+      <p class="align-center">
+        <mat-icon>map</mat-icon>
+        <a [href]="'https://www.google.com/maps/search/?api=1&query='+getOrderAddress()"
+          target="_blank">{{getOrderAddress()}}</a>
+      </p>
+    </mat-card-content>
+    <mat-card-content class="footer" *ngIf="myUser; else notUserTemplate">
+      <ng-container *ngIf="!loading;else loadingTemplate">
+        <ng-container *ngIf="mode === CardModeEnum.CHECK">
+          <mat-icon (click)="onClickAddOrderToMyList()" title="Seguir" class="btn-animation">
+            add_circle
+          </mat-icon>
+        </ng-container>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-template #notFullModeTemplate>
+  <mat-card class="order-card" [ngClass]="{
+    'mat-elevation-z0': mode === CardModeEnum.MODAL,
+    'pending': order.status === OrderStatusEnum.PENDING,
+    'ready-to-pick-up':order.status === OrderStatusEnum.READY_TO_PICK_UP,
+    'delivered':order.status === OrderStatusEnum.DELIVERED
+  }">
+    <mat-card-header class="header">
+      <div mat-card-avatar class="order-header-image"></div>
+      <mat-card-title class="title1">{{order.title}}</mat-card-title>
+      <mat-card-subtitle class="mr-b">{{order?.code | formatCodeOrder}}</mat-card-subtitle>
+      <mat-card-subtitle class="mr-b f-12">{{order?.company?.name}}</mat-card-subtitle>
+      <div class="end" fxHide.lt-sm>
+        <ng-container [ngTemplateOutlet]="statustTemplate" [ngTemplateOutletContext]="{isMobile:false}"></ng-container>
+        <ng-container [ngTemplateOutlet]="dateTemplate" [ngTemplateOutletContext]="{isMobile:false}"></ng-container>
+        <ng-container *ngIf="order?.price" [ngTemplateOutlet]="priceTemplate"
+          [ngTemplateOutletContext]="{isMobile:false}"></ng-container>
+      </div>
+    </mat-card-header>
+    <mat-card-content class="content">
+      <div fxHide.gt-xs>
+        <ng-container [ngTemplateOutlet]="statustTemplate" [ngTemplateOutletContext]="{isMobile:true}"></ng-container>
+        <ng-container [ngTemplateOutlet]="dateTemplate" [ngTemplateOutletContext]="{isMobile:true}"></ng-container>
+        <ng-container *ngIf="order?.price" [ngTemplateOutlet]="priceTemplate"
+          [ngTemplateOutletContext]="{isMobile:true}"></ng-container>
+      </div>
+      <p class="desc" *ngIf="order?.description?.length > 0">
+        {{order.description}}
+      </p>
+    </mat-card-content>
+    <mat-divider inset *ngIf="[CardModeEnum.CHECK, CardModeEnum.USER].includes(mode)">
+    </mat-divider>
+    <mat-card-content class="footer" *ngIf="myUser; else notUserTemplate">
+      <ng-container *ngIf="!loading;else loadingTemplate">
+        <ng-container *ngIf="mode === CardModeEnum.COMPANY_ADMIN">
+          <mat-icon (click)="onClickEditOrder()" title="Editar" class="btn-animation">
+            edit
+          </mat-icon>
+          <mat-icon (click)="onClickUpdateCompanyOrderToNextStatus(true)"
+            [ngClass]="{disabled: isUpdateCompanyOrderToNextStatusDisabled()}" title="Actualizar al siguiente estado"
+            class="btn-animation">
+            next_plan
+          </mat-icon>
+        </ng-container>
+        <ng-container *ngIf="mode === CardModeEnum.CHECK">
+          <mat-icon (click)="onClickAddOrderToMyList()" title="Seguir" class="btn-animation">
+            add_circle
+          </mat-icon>
+        </ng-container>
+        <ng-container *ngIf="mode === CardModeEnum.USER">
+          <mat-icon (click)="onClickDeleteOrder(true)" title="Dejar de seguir" class="btn-animation">
+            delete
+          </mat-icon>
+        </ng-container>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-template #notUserTemplate>
+  <mat-card-content class="footer">
+    <span class="not-user-msg">{{stringSrv.getLiteral('registerToFollow')}}</span>
+  </mat-card-content>
+</ng-template>
+
+<ng-template #statustTemplate let-isMobile='isMobile' let-isFullMode='isFullMode'>
+  <p class="status" [ngClass]="{'full-mode': isFullMode === true}">
+    <span class="txt" *ngIf="!isMobile">{{stringSrv.getLiteral('orderStatus', order.status)}}</span>
+    <ng-container *ngIf="order.status === OrderStatusEnum.PENDING">
+      <mat-icon class="icon-pending">av_timer</mat-icon>
+    </ng-container>
+    <ng-container *ngIf="order.status === OrderStatusEnum.READY_TO_PICK_UP">
+      <mat-icon class="icon-ready_to_pick_up">redeem</mat-icon>
+    </ng-container>
+    <ng-container *ngIf="order.status === OrderStatusEnum.DELIVERED">
+      <mat-icon class="icon-delivered">task_alt</mat-icon>
+    </ng-container>
+    <span class="txt" *ngIf="isMobile">{{stringSrv.getLiteral('orderStatus', order.status)}}</span>
+  </p>
+</ng-template>
+
+<ng-template #priceTemplate let-isMobile='isMobile' let-isFullMode='isFullMode'>
+  <p class="price" [ngClass]="{'full-mode': isFullMode === true}">
+    <span class="txt" *ngIf="!isMobile">{{order.price | currency: 'EUR': 'symbol'}}</span>
+    <mat-icon>wallet</mat-icon>
+    <span class="txt" *ngIf="isMobile">{{order.price | currency: 'EUR': 'symbol'}}</span>
+  </p>
+</ng-template>
+
+<ng-template #dateTemplate let-isMobile='isMobile' let-isFullMode='isFullMode'>
+  <p class="date" [ngClass]="{'full-mode': isFullMode === true}">
+    <span class="txt" *ngIf="!isMobile">{{order.date | date: 'dd/MM/yyyy'}}</span>
+    <mat-icon>event_available</mat-icon>
+    <span class="txt" *ngIf="isMobile">{{order.date | date: 'dd/MM/yyyy'}}</span>
+  </p>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <app-spinner></app-spinner>
+</ng-template>

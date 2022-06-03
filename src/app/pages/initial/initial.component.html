@@ -1,0 +1,68 @@
+<div class="initial-body">
+  <div class="container">
+    <div class="first-container">
+      <img ngClass.lt-md="mobile" ngClass.gt-sm="not-mobile" class="logo" src="assets/img/logo.png" alt="logo">
+      <img src="assets/img/arrow_b.svg" alt="Flecha dirección hacia abajo" class="arrow">
+      <div class="my-user-main-container" ngClass.lt-md="mobile" ngClass.gt-sm="not-mobile">
+        <div class="my-user-container">
+          <div class="my-user remove-border-card">
+            <ng-container *ngIf="!error;else errorTemplate">
+              <ng-container *ngIf="!loading;else loadingTemplate"
+                [ngTemplateOutlet]="myUser ? loggedTemplate : loginTemplate">
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="second-container">
+      <!-- <div class="image-container">
+        <img src="assets/img/searching_box.svg" alt="Hombre buscando en una caja">
+      </div> -->
+      <div class="box">
+        <div class="content">
+          <mat-icon class="icon">search</mat-icon>
+          <div class="title">{{stringSrv.getLiteral('label.consultfast.title')}}</div>
+          <p>{{stringSrv.getLiteral('label.consultfast.description')}}</p>
+        </div>
+        <div class="content">
+          <mat-icon class="icon">add_circle</mat-icon>
+          <div class="title">{{stringSrv.getLiteral('label.follow.title')}}</div>
+          <p>{{stringSrv.getLiteral('label.follow.description')}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="third-container">
+      <div class="consult-order">
+        <span class="comp-title">{{stringSrv.getLiteral('doConsult')}}</span>
+        <app-consult-order class="comp" [myUser]="null"></app-consult-order>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>
+
+<ng-template #loggedTemplate>
+  <div class="logged">
+    <img src="assets/img/hello.svg" alt="welcome">
+    <div class="label">
+      {{stringSrv.getLiteral('logged.label')}}
+    </div>
+    <button mat-flat-button color="accent" class="btn-animation" (click)="goToMyPage()">
+      <mat-icon>input</mat-icon>
+      {{stringSrv.getLiteral('goToMyPage')}}
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #errorTemplate>
+  <app-notification></app-notification>
+</ng-template>
+
+<ng-template #loginTemplate>
+  <app-login-register></app-login-register>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <app-spinner></app-spinner>
+</ng-template>

@@ -1,0 +1,241 @@
+{
+  "check": "Consultar",
+  "search": "Buscar",
+  "province": "Provincia",
+  "city": "Ciudad",
+  "company": "Empresa",
+  "label.checkOrderCode": "Código del pedido",
+  "label.checkOrderCode.requiredError": "El código es obligatorio.",
+  "addToMyList": "Seguir",
+  "searchOther": "Buscar otro",
+  "accept": "Aceptar",
+  "cancel": "Cancelar",
+  "delete": "Eliminar",
+  "logout": "Cerrar sesión",
+  "login": "Iniciar sesión",
+  "register": "Registrarse",
+  "createAccount": "Crear cuenta",
+  "continue": "Continuar",
+  "enter": "Entrar",
+  "newAccount": "Nueva cuenta",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "confirmPassword": "Confirmar contraseña",
+  "name": "Nombre",
+  "surnames": "Apellidos",
+  "or": "O",
+  "doConsult": "Haz una consulta rápida",
+  "registerToFollow": "¡Regístrate para seguir la consulta!",
+  "label.follow.title": "No lo pierdas de vista",
+  "label.follow.description": "Puedes seguir tu pedido para revisar su estado rápidamente.",
+  "label.consultfast.title": "Consultas rápidas",
+  "label.consultfast.description": "Revisa el estado del pedido o servicio de tu establecimiento favorito.",
+  "label.login.email.RequiredError": "El correo electrónico es obligatorio.",
+  "label.login.email.InvalidError": "El correo electrónico no es válido.",
+  "label.login.password.InvalidError": "La contraseña debe tener mínimo 6 caracteres.",
+  "label.login.password.RequiredError": "La contraseña es obligatoria.",
+  "label.login.password.NotSame": "Las contraseñas no coinciden.",
+  "label.login.name.RequiredError": "La contraseña es obligatoria.",
+  "label.login.surnames.RequiredError": "La contraseña es obligatoria.",
+  "go.to.normalPage": "Vista usuario",
+  "go.to.adminPage": "Vista administrador",
+  "question.deleteOrder.title": "Eliminar pedido",
+  "question.deleteOrderAdmin.message": "Si elimina el pedido, no podrá recuperarlo.",
+  "question.deleteOrderUser.message": "Puedes buscarlo para volver a seguirlo.",
+  "question.updateCompanyOrderToNextStatus.title": "Actualizar pedido",
+  "question.updateCompanyOrderToNextStatus.message": "El nuevo estado va a ser {0}.",
+  "question.logout.title": "Adiós",
+  "question.logout.message": "¿Cerrar la sesión?",
+  "companyOrders": "Pedidos",
+  "newOrder": "Nuevo pedido",
+  "label.newOrder.code": "Código del pedido",
+  "label.newOrder.title": "Título",
+  "label.newOrder.minimumCharacters": "Mínimo {0} caracteres",
+  "label.newOrder.titleRequiredError": "El título es obligatorio.",
+  "label.newOrder.description": "Descripción",
+  "label.newOrder.date": "Fecha prevista de entrega",
+  "label.newOrder.price": "Cantidad a abonar",
+  "label.newOrder.status": "Estado",
+  "create": "Crear",
+  "update": "Actualizar",
+  "ordersList.filter.code.label": "Código",
+  "ordersList.filter.status.label": "Estado",
+  "ordersList.filter.status.all": "Todos (excepto {0})",
+  "ordersList.filter.date.label": "Fecha",
+  "ordersList.filter.date.all": "Todas",
+  "ordersList.filter.date.today": "Hoy",
+  "ordersList.filter.date.custom": "Rango personalizado",
+  "ordersList.filter.date.custom.pickerLabel": "Seleccione un rango",
+  "stats.company.pending.orders.html.plural": "Hoy tienes <span class='bold'>{0}</span> pedidos listos para recogida.",
+  "stats.company.pending.orders.html.singular": "Hoy tienes <span class='bold'>{0}</span> pedido listo para recogida.",
+  "logged.label": "¡Hola!\nParece que ya has iniciado sesión.",
+  "goToMyPage": "Ir a mi página",
+  "updateOrderToNextStatus": "Actualizar a {0}",
+  "orderStatus": {
+    "PENDING": "Pendiente",
+    "READY_TO_PICK_UP": "Listo para recogida",
+    "DELIVERED": "Entregado/Finalizado"
+  },
+  "months": {
+    "1": "Enero",
+    "2": "Febrero",
+    "3": "Marzo",
+    "4": "Abril",
+    "5": "Mayo",
+    "6": "Junio",
+    "7": "Julio",
+    "8": "Agosto",
+    "9": "Septiembre",
+    "10": "Octubre",
+    "11": "Noviembre",
+    "12": "Diciembre"
+  },
+  "charts": {
+    "ORDERS_CREATED_LAST_DAYS": {
+      "xAxisLabel": "Pedidos creados en los últimos 7 días.",
+      "yAxisLabel": ""
+    },
+    "COUNT_TOMORROW_ORDERS_BY_STATUS_PLURAL": {
+      "xAxisLabel": "Pedidos para mañana",
+      "yAxisLabel": ""
+    },
+    "COUNT_TOMORROW_ORDERS_BY_STATUS_SINGULAR": {
+      "xAxisLabel": "Pedido para mañana",
+      "yAxisLabel": ""
+    }
+  },
+  "notifications.errors": {
+    "generic": {
+      "message": "Se ha producido un error.",
+      "description": "Por favor, inténtelo de nuevo más tarde."
+    },
+    "company.pendingOrders": {
+      "message": "No se han podido obtener los pedidos pendientes.",
+      "description": "Por favor, inténtelo de nuevo más tarde."
+    },
+    "company.orders.stats": {
+      "message": "No se han podido cargar las estadísticas.",
+      "description": "Por favor, inténtelo de nuevo más tarde."
+    }
+  },
+  "notifications.info": {
+    "emptyOrderList": {
+      "message": "No se han encontrado pedidos.",
+      "description": ""
+    }
+  },
+  "notifications.toast": {
+    "checkOrderError": {
+      "message": "Ha ocurrido un error. Vuelva ha intentarlo más tarde.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "checkOrderErrorNoOrder": {
+      "message": "No se ha encontrado ningún pedido.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "addOrderToMyListSuccess": {
+      "message": "El pedido se ha seguido con éxito.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "addOrderToMyListError": {
+      "message": "Ha ocurrido un error al seguir el pedido.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "addOrderToMyListErrorExisting": {
+      "message": "Ya estás siguiendo el pedido.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "deleteOrderSuccess": {
+      "message": "El pedido ha sido eliminado.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "deleteOrderError": {
+      "message": "Ha ocurrido un error al eliminar el pedido.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "addNewOrderSuccess": {
+      "message": "El pedido ha sido creado con éxito.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "addNewOrderError": {
+      "message": "Ha ocurrido un error al crear el pedido.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "updateOrderSuccess": {
+      "message": "El pedido ha sido actualizado con éxito.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "updateOrderError": {
+      "message": "Ha ocurrido un error al modificar el pedido.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "loginError": {
+      "message": "Ha ocurrido un error al iniciar sesión.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "registerError": {
+      "message": "Ha ocurrido un error al completar el registro.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "unauthorizedPage": {
+      "message": "No tiene permisos para acceder a esta página.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "notLogged": {
+      "message": "Debe iniciar sesión para acceder a esta página.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "recoveryUserError": {
+      "message": "Ha ocurrido un error al recuperar su usuario.",
+      "button": null,
+      "duration": 6000,
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.order-list {
+  margin-top: 10px;
+
+  .filters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .field-status {
+      margin-right: 20px;
+    }
+
+    .mobile {
+      width: 100%;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+
+  .order-by {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+
+    .mat-icon {
+      margin-left: 1px;
+    }
+  }
+
+  .order-card {
+    margin: 0.1px;
+  }
+
+  .paginator {
+    display: flex;
+    justify-content: center;
+  }
+
+  .disabled {
+    display: none !important;
+  }
+}

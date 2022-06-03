@@ -1,0 +1,35 @@
+.my-home-admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .pending-orders-container {
+    border: 2px solid var(--color-primary);
+    border-radius: 5px;
+    background-color: white;
+    margin-top: 20px;
+    cursor: pointer;
+    max-width: 600px;
+    padding: 10px 20px;
+
+    .pending-orders {
+      text-align: center;
+      font-size: large;
+      padding: 20px;
+    }
+  }
+
+  .stats-container {
+    margin: 20px;
+  }
+
+  .orders-consulted-container {
+    margin: 20px;
+  }
+
+  .mat-divider {
+    width: 100%;
+  }
+
+}

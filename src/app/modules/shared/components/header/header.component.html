@@ -1,0 +1,78 @@
+<header class="nav-header-container">
+  <div class="nav-header" fxLayout="row">
+    <ng-container *ngIf="confirmModal?.isEnabled">
+      <app-confirm-dialog [config]="confirmModal" (onClickAccept)="onClickModal()" (onClickCancel)="onClickModal(true)">
+      </app-confirm-dialog>
+    </ng-container>
+    <mat-toolbar color="primary">
+      <img class="logo" src="assets/img/logo.png" alt="logo" (click)="navigateToInitialPage()">
+      <span class="spacer"></span>
+      <ng-container *ngIf="changePageMode.userMode">
+        <!-- BOTON BUSCAR PEDIDO -->
+        <ng-container>
+          <div fxHide.gt-xs (click)="goToCheckPage()" class="mobile-icon">
+            <mat-icon>search</mat-icon>
+          </div>
+          <div fxHide.lt-sm>
+            <button mat-flat-button (click)="goToCheckPage()" class="not-mobile-icon btn-animation">
+              <mat-icon>search</mat-icon>
+              <span fxHide.lt-sm>{{stringSrv.getLiteral('check')}}</span>
+            </button>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="changePageMode.companyAdminMode">
+        <!-- BOTON LISTA PEDIDOS EMPRESA -->
+        <ng-container>
+          <div fxHide.lt-sm>
+            <button mat-flat-button color="semiwhite" class="not-mobile-icon btn-animation"
+              (click)="goToCompanyOrders()">
+              <mat-icon>list_alt</mat-icon>
+              <span fxHide.lt-sm>{{stringSrv.getLiteral('companyOrders')}}</span>
+            </button>
+          </div>
+          <div fxHide.gt-xs (click)="goToCompanyOrders()" class="mobile-icon">
+            <mat-icon>list_alt</mat-icon>
+          </div>
+        </ng-container>
+        <!-- BOTON CREAR NUEVO PEDIDO -->
+        <ng-container>
+          <div fxHide.lt-sm>
+            <button mat-flat-button class="not-mobile-icon btn-animation" (click)="goToNewCompanyOrder()">
+              <mat-icon>add_circle_outline</mat-icon>
+              <span>{{stringSrv.getLiteral('newOrder')}}</span>
+            </button>
+          </div>
+          <div fxHide.gt-xs (click)="goToNewCompanyOrder()" class="mobile-icon">
+            <mat-icon class="final-icon">add_circle_outline</mat-icon>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-container>
+        <mat-icon class="profile" [matMenuTriggerFor]="menuProfile">account_circle</mat-icon>
+        <mat-menu #menuProfile="matMenu">
+          <div class="profile-menu">
+            <div class="header">
+              <div class="primary">{{myUser?.name}} {{myUser?.surnames}}</div>
+              <div class="secondary">{{myUser?.email}}</div>
+              <div class="secondary" *ngIf="myUser?.role === UserRoleEnum.COMPANY_ADMIN">{{myUser?.company?.name}}</div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="footer">
+              <ng-container *ngIf="myUser?.role === UserRoleEnum.COMPANY_ADMIN">
+                <button mat-flat-button color="accent" dense (click)="goToChangePageMode()" class="btn-animation">
+                  <mat-icon>swap_horiz</mat-icon>
+                  {{stringSrv.getLiteral((changePageMode?.btnLiteral))}}
+                </button>
+              </ng-container>
+              <button mat-flat-button color="accent" dense (click)="onClickLogout()" class="btn-animation">
+                <mat-icon>exit_to_app</mat-icon>
+                {{stringSrv.getLiteral('logout')}}
+              </button>
+            </div>
+          </div>
+        </mat-menu>
+      </ng-container>
+    </mat-toolbar>
+  </div>
+</header>

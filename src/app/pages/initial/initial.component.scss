@@ -1,0 +1,187 @@
+.initial-body {
+  height: 100%;
+  width: 100%;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .first-container {
+      background-color: var(--color-primary2);
+      background-image: linear-gradient(135deg, var(--color-primary2), var(--color-darkgreen));
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .logo {
+        padding-bottom: 2vh;
+
+        &.mobile {
+          width: 90vw;
+        }
+      }
+
+      .my-user-main-container {
+        max-width: 350px;
+        max-height: 450px;
+        background-color: white;
+        border: 2px solid var(--color-darkgreen);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10vh;
+
+        &.mobile {
+          padding: 30px;
+        }
+
+        &.not-mobile {
+          width: 100%;
+          height: 100%;
+        }
+
+        .my-user-container {
+          .my-user {
+            .logged {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
+              font-size: 20px;
+              text-align: center;
+              white-space: pre-line;
+
+              button {
+                margin-top: 15px;
+              }
+
+              .btn-animation:hover {
+                background: var(--color-primary) !important;
+              }
+
+              img {
+                max-width: 100%;
+                margin-bottom: 30px;
+              }
+            }
+          }
+        }
+      }
+
+      .arrow {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: 2vh;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
+
+    .second-container {
+      display: flex;
+      height: auto;
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      background-color: var(--color-secondary2);
+
+      .image-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 5vh 0vh;
+
+        img {
+          max-height: 100%;
+          max-width: 300px;
+        }
+      }
+
+      .box {
+        margin: 6vh 0vh 5vh 0vh;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-around;
+        flex-wrap: wrap;
+
+        .content {
+          display: flex;
+          width: 40%;
+          max-width: none;
+          flex-direction: column;
+          align-items: center;
+          flex: 0 0 auto;
+          text-align: center;
+
+          .icon {
+            margin-bottom: 10px;
+            max-width: 100%;
+            vertical-align: middle;
+            display: inline-block;
+            font-size: 45px;
+            width: 45px;
+            height: 45px;
+          }
+
+          .title {
+            margin-bottom: 5px;
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: 700;
+          }
+
+          p {
+            margin-bottom: 10px;
+            color: #6b6b6b;
+            font-size: 16px;
+            line-height: 30px;
+            margin-top: 0;
+          }
+        }
+      }
+    }
+
+    .third-container {
+      display: flex;
+      height: auto;
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      background-color: var(--color-base);
+
+      .consult-order {
+        margin-top: 6vh;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        .comp-title {
+          text-align: center;
+          font-size: 22px;
+          font-weight: 500;
+        }
+
+        .comp {
+          width: 100%;
+          max-width: 1000px;
+          margin: 5px;
+        }
+      }
+    }
+
+  }
+}

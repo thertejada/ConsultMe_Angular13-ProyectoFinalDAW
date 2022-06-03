@@ -1,0 +1,104 @@
+.login-comp {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+
+  @media only screen and (min-width: 768px) {
+    .card-padding {
+      padding: 40px 70px 40px 70px;
+    }
+  }
+
+  .btn-animation:hover {
+    background-color: var(--color-primary) !important;
+    color: white
+  }
+
+  .card {
+    .header {
+      text-align: center;
+      width: 100%;
+      display: block;
+      font-weight: 400;
+      padding-bottom: 20px;
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    .register-form {
+      padding: 20px;
+    }
+
+    .enter-button-container,
+    .create-account-button-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      padding-top: 15px;
+
+      button {
+        border: 1px solid currentColor;
+        background: var(--color-secondary3);
+      }
+    }
+
+    .divider-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .divider {
+        max-width: 90%;
+        position: relative;
+        top: 9px
+      }
+
+      span {
+        padding: 0 10px 0 10px;
+      }
+    }
+
+
+    .register-button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+
+      button {
+        border: 1px solid var(--color-secondary3);
+        color: white;
+        width: 130px;
+      }
+    }
+  }
+
+  .register {
+    .mat-card:not([class*=mat-elevation-z]) {
+      box-shadow: none !important;
+    }
+
+    p {
+      display: flex;
+      justify-content: center;
+
+      .pl {
+        padding-left: 10px;
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+      p {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .pl {
+          padding-left: 0px;
+        }
+      }
+    }
+  }
+}

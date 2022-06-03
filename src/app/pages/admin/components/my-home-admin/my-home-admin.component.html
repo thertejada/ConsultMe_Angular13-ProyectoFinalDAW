@@ -1,0 +1,52 @@
+<div class="my-home-admin">
+  <div class="pending-orders-container">
+    <div class="pending-orders" (click)="goToPendingOrders()">
+      <ng-container [ngTemplateOutlet]="errorPendingOrders ? errorTemplate : pendingOrdersTemplate"
+        [ngTemplateOutletContext]="{notification: pendingOrdersError}">
+      </ng-container>
+    </div>
+  </div>
+  <div class="stats-container">
+    <ng-container [ngTemplateOutlet]="errorPieChartStats ? errorTemplate : pieChartTemplate"
+      [ngTemplateOutletContext]="{notification: companyOrdersError}">
+    </ng-container>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="orders-consulted-container">
+    <ng-container [ngTemplateOutlet]="errorCompanyOrdersStats ? errorTemplate : ordersConsultedTemplate"
+      [ngTemplateOutletContext]="{notification: companyOrdersError}">
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #pendingOrdersTemplate>
+  <ng-container *ngIf="!lodingPendingOrders;else loadingTemplate">
+    <div [innerHTML]="pendingOrdersTxt | sanitizeHtml">
+    </div>
+  </ng-container>
+</ng-template>
+
+
+<ng-template #pieChartTemplate>
+  <ng-container *ngIf="!lodingPieChartStats;else loadingTemplate">
+    <app-advanced-pie-chart [data]="pieChartStats" [label]="pieChartLabel"></app-advanced-pie-chart>
+  </ng-container>
+</ng-template>
+
+<ng-template #ordersConsultedTemplate>
+  <ng-container *ngIf="!lodingCompanyOrdersStats;else loadingTemplate">
+    <div>
+      <app-vertical-bar-chart [data]="companyOrdersStats" [xAxisLabel]="xAxisLabelCompanyOrdersStats"
+        [yAxisLabel]="yAxisLabelCompanyOrdersStats" [showLegend]="false">
+      </app-vertical-bar-chart>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <app-spinner></app-spinner>
+</ng-template>
+
+<ng-template #errorTemplate let-notification="notification">
+  <app-notification [notification]="notification"></app-notification>
+</ng-template>

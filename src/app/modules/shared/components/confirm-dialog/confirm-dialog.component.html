@@ -1,0 +1,19 @@
+<ng-template #confirmrModalTemplate let-ref>
+  <div class="order-card-delete-modal">
+    <div class="alert-header question-bg">
+      <img class="alert-img" src="assets/img/question.svg" />
+    </div>
+    <div class="alert-body">
+      <span class="alert-title">{{config.title}}</span>
+      <span class="alert-message">{{config.message}}</span>
+      <div class="question-buttons">
+        <button mat-stroked-button color="warn" class="btn-animation cancel" (click)="onClicktBtn(true)">
+          {{config.cancelBtn}}
+        </button>
+        <button mat-flat-button color="primary" class="btn-animation accept" (click)="onClicktBtn(false)">
+          {{config.acceptBtn}}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

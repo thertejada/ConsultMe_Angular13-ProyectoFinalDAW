@@ -1,0 +1,38 @@
+.check-order {
+  .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5vh;
+
+    img {
+      max-height: 100%;
+      max-width: 300px;
+    }
+  }
+
+  .search-parent-container {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+
+    .search-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .input {
+        width: 220px;
+      }
+
+      .search-btn {
+        width: 100px;
+      }
+
+      .search-btn:hover:enabled {
+        background-color: var(--color-primary) !important;
+      }
+    }
+  }
+
+}

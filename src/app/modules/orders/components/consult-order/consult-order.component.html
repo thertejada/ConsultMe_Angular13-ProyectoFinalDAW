@@ -1,0 +1,38 @@
+<div class="check-order">
+  <ng-container *ngIf="!loading;else loadingTemplate">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="search-parent-container">
+      <div class="search-container">
+        <mat-form-field appearance="outline" [floatLabel]="'always'" class="input">
+          <mat-label>{{stringSrv.getLiteral('label.checkOrderCode')}}</mat-label>
+          <input matInput #input appNumberOnly formControlName="orderCode" minlength="{{CODE_ORDER_MIN_LENGTH}}"
+            maxlength="{{CODE_ORDER_MAX_LENGTH}}"
+            (paste)="form.get('orderCode')?.setValue(stringSrv.trimAll($event?.clipboardData?.getData('text')))">
+          <mat-hint align="end">{{input.value?.length || 0}}/{{CODE_ORDER_MAX_LENGTH}}</mat-hint>
+          <mat-error *ngIf="form.get('orderCode')?.hasError('required')">
+            {{stringSrv.getLiteral('label.checkOrderCode.requiredError')}}
+          </mat-error>
+          <button *ngIf="form.get('orderCode')?.value" matSuffix mat-icon-button aria-label="Clear"
+            (click)="resetFormControlValue('orderCode')">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid"
+          class="search-btn btn-animation">
+          {{stringSrv.getLiteral('search')}}
+        </button>
+      </div>
+    </form>
+  </ng-container>
+  <div *ngIf="!order" class="image-container">
+    <img src="assets/img/searching_box.svg" alt="Hombre buscando en una caja">
+  </div>
+  <ng-container *ngIf="order">
+    <app-order-card [order]="order" [mode]="OrderCardModeEnum.CHECK" [fullMode]="true"
+      (isLoading)="cardIsLoadingEvent($event)" [myUser]="myUser" (orderAddedToMyList)="onAddToMyListEvent($event)">
+    </app-order-card>
+  </ng-container>
+</div>
+
+<ng-template #loadingTemplate>
+  <app-spinner></app-spinner>
+</ng-template>

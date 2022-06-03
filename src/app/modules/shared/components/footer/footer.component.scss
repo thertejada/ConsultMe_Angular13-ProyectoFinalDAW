@@ -1,0 +1,46 @@
+.app-footer {
+  background-color: var(--color-dark);
+
+  .container {
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 15px;
+    margin-top: 50px;
+    color: white;
+    font-size: 0.9em;
+
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      @media only screen and (max-width: 768px) {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    .image-container {
+      display: flex;
+
+      @media only screen and (max-width: 768px) {
+        justify-content: center;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        padding: 5px 0px 10px 0px;
+      }
+
+      img {
+        max-width: 135px;
+        height: 100%;
+      }
+    }
+
+    .author {
+      font-weight: 500;
+      font-size: 1em;
+      color: #a9d4a9;
+    }
+  }
+}

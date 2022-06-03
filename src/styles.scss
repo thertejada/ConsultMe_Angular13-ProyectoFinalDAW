@@ -1,0 +1,315 @@
+@use '@angular/material'as mat;
+@include mat.core();
+
+$md-pal1: (50 : #e7eae8,
+  100 : #c2cac6,
+  200 : #9aa7a0,
+  300 : #71837a,
+  400 : #52695e,
+  500 : #344e41,
+  600 : #2f473b,
+  700 : #273d32,
+  800 : #21352a,
+  900 : #15251c,
+  A100 : #69ffae,
+  A200 : #36ff93,
+  A400 : #03ff77,
+  A700 : #00e86b,
+  contrast: (50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  ));
+
+$md-pal2: (50 : #e7ebe8,
+  100 : #c4cec6,
+  200 : #9dada0,
+  300 : #758c79,
+  400 : #58735d,
+  500 : #3a5a40,
+  600 : #34523a,
+  700 : #2c4832,
+  800 : #253f2a,
+  900 : #182e1c,
+  A100 : #72ff89,
+  A200 : #3fff5f,
+  A400 : #0cff34,
+  A700 : #00f128,
+  contrast: (50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  ));
+
+$md-pal3: (50 : #ebf0eb,
+  100 : #cdd9cd,
+  200 : #acc0ab,
+  300 : #8aa789,
+  400 : #719470,
+  500 : #588157,
+  600 : #50794f,
+  700 : #476e46,
+  800 : #3d643c,
+  900 : #2d512c,
+  A100 : #9fff9c,
+  A200 : #6eff69,
+  A400 : #3cff36,
+  A700 : #23ff1d,
+  contrast: (50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  ));
+
+$md-pal4: (50 : #f4f6f1,
+  100 : #e3e8dc,
+  200 : #d1d8c5,
+  300 : #bfc8ad,
+  400 : #b1bd9c,
+  500 : #a3b18a,
+  600 : #9baa82,
+  700 : #91a177,
+  800 : #88986d,
+  900 : #77885a,
+  A100 : #fbfff3,
+  A200 : #e7ffc0,
+  A400 : #d4ff8d,
+  A700 : #cbff74,
+  contrast: (50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  ));
+
+$md-pal5: (50 : #fbfaf9,
+  100 : #f4f3f0,
+  200 : #edebe6,
+  300 : #e5e3dc,
+  400 : #e0ddd5,
+  500 : #dad7cd,
+  600 : #d6d3c8,
+  700 : #d0cdc1,
+  800 : #cbc7ba,
+  900 : #c2beae,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #ffffff,
+  A700 : #fffdf6,
+  contrast: (50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  ));
+
+$spa-consultme-primary: mat.define-palette($md-pal1, 800);
+$spa-consultme-accent: mat.define-palette($md-pal2, 500);
+$spa-consultme-warn: mat.define-palette(mat.$red-palette);
+
+$spa-consultme-theme: mat.define-light-theme((color: (primary: $spa-consultme-primary,
+      accent: $spa-consultme-accent,
+      warn: $spa-consultme-warn)));
+
+@include mat.all-component-themes($spa-consultme-theme);
+
+/* Global styles */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--color-base);
+}
+
+.app-body {
+  margin: auto;
+  max-width: 1000px;
+  padding: 0px 5px;
+}
+
+.notification-error {
+  background-color: #be5e45;
+
+  .mat-simple-snack-bar-content {
+    color: white;
+  }
+
+  .mat-button-wrapper {
+    color: white;
+  }
+
+  .mat-simple-snackbar-action button {
+    background-color: #b71c1c;
+  }
+}
+
+.notification-success {
+  background-color: #628158;
+
+  .mat-simple-snack-bar-content {
+    color: white;
+  }
+
+  .mat-button-wrapper {
+    color: white;
+  }
+
+  .mat-simple-snackbar-action button {
+    background-color: #1b5e20;
+  }
+}
+
+.notification-warning {
+  background-color: #9c8a36;
+
+  .mat-simple-snack-bar-content {
+    color: white;
+  }
+
+  .mat-button-wrapper {
+    color: white;
+  }
+
+  .mat-simple-snackbar-action button {
+    background-color: rgb(73, 71, 18);
+  }
+}
+
+ngneat-dialog {
+  .ngneat-dialog-backdrop {
+    padding: 0px !important;
+  }
+
+  .ngneat-dialog-content {
+    max-width: 95% !important;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.advanced-pie-chart {
+  .legend-items {
+    // overflow: visible !important;
+    line-height: 2rem !important;
+  }
+
+  .total-value {
+    margin-bottom: 10px !important;
+  }
+}
+
+#registerModal {
+  .ngneat-dialog-content {
+    width: auto !important;
+  }
+}
+
+.remove-border-card {
+  .mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none !important;
+  }
+}
+
+.mat-menu-panel {
+  background-color: var(--color-primary2);
+  min-width: 280px !important;
+  max-width: 350px !important;
+}
+
+.mat-menu-content:not(:empty) {
+  padding-bottom: 0px !important;
+}
+
+.btn-animation {
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+
+.btn-animation:hover:enabled {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.mat-card {
+  padding: 0px !important;
+}
+
+
+.mat-form-field-outline {
+  background: white !important;
+}
+
+.company-order {
+  .mat-form-field-suffix {
+    display: flex;
+  }
+}
+
+.mat-paginator-outer-container {
+  border: 1px solid rgba(134, 134, 134, 0.25);
+  border-radius: 5px;
+
+  .mat-paginator-container {
+    justify-content: center !important;
+  }
+}
